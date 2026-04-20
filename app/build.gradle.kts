@@ -28,8 +28,6 @@ android {
             storePassword = keystoreProperties["storePassword"] as String?
             keyAlias = keystoreProperties["keyAlias"] as String?
             keyPassword = keystoreProperties["keyPassword"] as String?
-            println(storePassword)
-            println(keyPassword)
         }
     }
 
@@ -37,7 +35,7 @@ android {
         applicationId = "come.sunset.snake"
         minSdk = 24
         targetSdk = 35
-        versionCode = 3
+        versionCode = 4
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

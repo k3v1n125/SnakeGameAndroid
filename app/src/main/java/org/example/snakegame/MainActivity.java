@@ -7,12 +7,16 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import org.example.snakegame.Achievement.Achievement;
 
@@ -38,6 +42,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        View rootContainer = findViewById(R.id.root_container);
+        int basePaddingLeft = rootContainer.getPaddingLeft();
+        int basePaddingTop = rootContainer.getPaddingTop();
+        int basePaddingRight = rootContainer.getPaddingRight();
+        int basePaddingBottom = rootContainer.getPaddingBottom();
+        ViewCompat.setOnApplyWindowInsetsListener(rootContainer, (view, windowInsets) -> {
+            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.statusBars());
+            view.setPadding(
+                basePaddingLeft,
+                basePaddingTop + insets.top,
+                basePaddingRight,
+                basePaddingBottom
+            );
+            return windowInsets;
+        });
+        ViewCompat.requestApplyInsets(rootContainer);
 
         gameView = findViewById(R.id.game_view);
         applesText = findViewById(R.id.apples_text);

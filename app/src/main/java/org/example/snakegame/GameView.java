@@ -2,7 +2,6 @@ package org.example.snakegame;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -38,9 +37,6 @@ public class GameView extends View {
     private final Paint applePaint = new Paint();
     private final Paint starPaint = new Paint();
     private final Paint textPaint = new Paint();
-    
-    private Bitmap appleBitmap;
-    private Bitmap starBitmap;
 
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final Random random = new Random();
@@ -104,10 +100,6 @@ public class GameView extends View {
         highScoreManager = new HighScoreManager(getContext());
         gameStats.setUnlockedAchievements(achievementManager.getUnlocked().size());
         gameStats.setTotalAchievements(Achievement.values().length);
-        
-        // Load apple image
-        appleBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.apple);
-        starBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.star);
     }
 
     public void setGameListener(GameListener listener) {
@@ -235,11 +227,7 @@ public class GameView extends View {
 
         if (gameStats.isStarted()) {
             for (Item item : items) {
-                if (item instanceof Apple) {
-                    drawBitmap(canvas, item.getCell(), appleBitmap);
-                } else if (item instanceof Star) {
-                    drawBitmap(canvas, item.getCell(), starBitmap);
-                }
+                drawBitmap(canvas, item.getCell(), item.getBitmap(getContext()));
             }
 
             for (int i = 0; i < snake.size(); i++) {

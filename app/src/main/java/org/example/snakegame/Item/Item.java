@@ -1,5 +1,8 @@
 package org.example.snakegame.Item;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+
 import org.example.snakegame.Cell;
 
 public abstract class Item {
@@ -26,6 +29,8 @@ public abstract class Item {
     public void shiftSpawnTime(long deltaMillis) {
         spawnTimeMillis += deltaMillis;
     }
+
+    public abstract Bitmap getBitmap(Context context);
 
     public abstract long getExpireDurationMillis();
 }
